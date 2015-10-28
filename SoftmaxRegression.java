@@ -4,7 +4,7 @@ import org.jblas.*;
 /**
 * Softmax or Multinomial Regression
 */
-public class SoftmaxRegression {
+public class SoftmaxRegression implements Classifier {
 
     /* Number of features in each input vector */
     private int L;
@@ -36,8 +36,18 @@ public class SoftmaxRegression {
         }
     }
 
+    /**
+    * Returns the probabilities of each class, given a feature vector
+    */
     public DoubleMatrix probabilities(DoubleMatrix x) {
         return _probabilities(theta, x);
+    }
+
+    /**
+    * Returns the most probable class index
+    */
+    public int classify(DoubleMatrix x) {
+        return probabilities(x).argmax();
     }
 
     private static DoubleMatrix _probabilities(DoubleMatrix theta, DoubleMatrix x) {
@@ -49,6 +59,9 @@ public class SoftmaxRegression {
         return P;
     }
 
+    
+
+    // tester
     public static void main(String[] args) {
         int L = Integer.parseInt(args[0]);
         int K = Integer.parseInt(args[1]);

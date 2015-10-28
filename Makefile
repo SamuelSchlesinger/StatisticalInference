@@ -13,5 +13,10 @@ logistic:
 test:
 	javac -cp .:jars/* Test.java
 
+git:
+	git add .
+	git commit -m "arbitrary commit message"
+	git push -u origin master
+
 clean:
 	rm *.class

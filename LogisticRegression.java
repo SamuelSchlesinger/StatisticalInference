@@ -6,7 +6,7 @@ import org.jblas.DoubleMatrix;
 * Given a data matrix and a vector in {0, 1}, it trains a classification
 * vector using gradient descent to classify possibly unseen feature vectors.
 */
-public class LogisticRegression {
+public class LogisticRegression implements Classifier {
 
     /* Vector which is trained */
     private DoubleMatrix theta; 
@@ -46,11 +46,10 @@ public class LogisticRegression {
     }
 
     /**
-    * Given a feature vector and a threshold probability, returns true if the probability
-    * of the given vector being a positive instance is greater than the threshold, false otherwise
+    * Given a feature vector, returns the most likely classification
     */
-    public boolean classify(DoubleMatrix x, double threshold) {
+    public int classify(DoubleMatrix x) {
         assert x.rows == L;
-        return predict(x) > threshold; 
+        return predict(x) > 0.5 ? 1 : 0; 
     }
 }
