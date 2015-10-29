@@ -1,6 +1,9 @@
 all:
 	javac -cp .:jars/* *.java
 
+rbm:
+	javac -cp .:jars/* RBM.java
+
 softmax:
 	javac -cp .:jars/* SoftmaxRegression.java
 
