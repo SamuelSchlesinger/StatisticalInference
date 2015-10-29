@@ -117,6 +117,34 @@ public class RBM {
     }
 
     /**
+    * Randomizes the visible units
+    */
+    public void randomizeVisible() {
+        Random random = new Random();
+        for (int i = 0; i < V; i++) {
+            if (random.nextDouble() > 0.5) {
+                visible.put(i, 0, 1);
+            } else {
+                visible.put(i, 0, 0);
+            }
+        }
+    }
+
+    /**
+    * Returns the hidden state
+    */
+    public DoubleMatrix hidden() {
+        return hidden;
+    }
+
+    /**
+    * Returns the visible state
+    */
+    public DoubleMatrix visible() {
+        return visible;
+    }
+
+    /**
     * Trains the model using CD(k) on the given feature vectors for
     * the given number of iterations
     * Beta is a metaparameter which makes the sigmoid curve steeper 
@@ -133,6 +161,7 @@ public class RBM {
             DoubleMatrix CD_hidden = hidden.dup();
             DoubleMatrix CD_visible = visible.dup();
             DoubleMatrix CD_positive = hidden.mmul(visible.transpose());
+            randomizeVisible();
             for (int k = 0; k < K; k++) {
                 updateVisible(beta);
                 updateHidden(beta);
