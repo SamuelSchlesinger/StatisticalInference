@@ -30,8 +30,7 @@ public class SoftmaxRegression implements Classifier {
         for (int i = 0; i < iterations; i++) {
             int choice = random.nextInt(N);
             DoubleMatrix x = X.getColumn(choice);
-            DoubleMatrix y = Y.getColumn(choice);
-            y.subi(_probabilities(theta, x));
+            DoubleMatrix y = Y.getColumn(choice).subi(_probabilities(theta, x));    
             theta.addi(x.mmul(y.transpose()).mmuli(learningRate));
         }
     }

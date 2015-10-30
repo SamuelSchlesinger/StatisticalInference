@@ -76,27 +76,11 @@ public class MNISTReader {
     public static void printDigit(DoubleMatrix m, int numCols, int numRows) { 
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
-                System.out.printf("%c", m.get(i * numCols + j) == 1 ? '0' : ' ');
+                System.out.printf("%c", m.get(i * numCols + j) == 1 ? ' ' : '#');
             } System.out.println();
         }
     }
 
     public static void main(String[] args) {
-        try {
-            MNISTReader reader = new MNISTReader("mnist/train-labels-idx1-ubyte", "mnist/train-images-idx3-ubyte");
-            RBM rbm = new RBM(reader.numRows() * reader.numCols(), 500);
-            while (reader.hasNext()) {
-                MNISTPair p = reader.next();
-                System.out.println(p.label);
-                printDigit(p.image, reader.numCols(), reader.numRows());
-                rbm.CD(3, p.image, 10, 2, 0.007);
-                rbm.setVisible(p.image);
-                rbm.updateHidden(3);
-                rbm.updateVisible(3);
-                printDigit(rbm.visible(), reader.numCols(), reader.numRows());
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
     }
 }

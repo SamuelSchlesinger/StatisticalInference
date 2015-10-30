@@ -36,7 +36,7 @@ public class RBM {
     public RBM(int visible, int hidden) {
         this.V = visible;
         this.H = hidden;
-        this.theta = DoubleMatrix.randn(visible, hidden);
+        this.theta = DoubleMatrix.randn(visible, hidden).mmuli(0.1);
         this.momentum = theta.dup();
         this.visibleBias = DoubleMatrix.randn(visible);
         this.visible = DoubleMatrix.randn(visible);
